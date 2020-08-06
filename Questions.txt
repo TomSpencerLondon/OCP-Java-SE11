@@ -1,0 +1,362 @@
+Q1) Given:
+
+var x;
+x = 100;
+sop("x is " + x);
+
+What happens:
+A) x is 100
+B) Compilation fails
+C) Exception at runtime
+
+Q2) Given:
+
+public void doStuff(var x) { // line n1
+	x += 100;
+	sop("x is " + x);
+}
+
+doStuff(99); // line n2
+doStuff("Hello "); // line n3
+
+What happens:
+A) x is 199
+B) x is 199
+   x is Hello 100
+C) Compilation fails at line n1
+D) Compilation fails at line n2
+E) Compilation fails at line n3
+
+
+Q3) How does the memory allocation for var differ from int, or String variables?
+
+A) Determined at runtime, might be the same
+B) Definitely the same
+C) Fixed at 8 bytes (on 64 bit machine)
+
+Q4) Given
+
+StringBuilder sb1 = new StringBuilder("Hello");
+StringBuilder sb2 = new StringBuilder("Hello");
+sout(sb1.equals(sb2));
+
+A) true
+B) false
+C) Compilation fails
+D) Exception at runtime
+
+
+What is the result?
+
+Q5) Given:
+  class X {
+    static int MAX_VAL = 100;
+    int value = 99;
+    public void setVal(int x) {
+      if (x <= MAX_VAL) value = x;
+    }
+  }
+And:
+    X a = new X();
+    X b = new X();
+    a.setVal(120);
+    System.out.print(a.value + ", ");
+    b.MAX_VAL = 150;
+    a.setVal(140);
+    System.out.println(a.value);
+What is the result?
+    A) 99, 99
+    B) 120, 140
+    C) 99, 140
+    D) Compilation failure
+    E) Exception at runtime
+
+Q6) Given:
+  class Y {
+    static String sayHi() { return "Y-Hello"; }
+    String sayHi2() { return "Y-Hello2"; }
+  }
+and:
+  class Z extends Y {
+    static String sayHi() { return "Z-Hello"; }
+    String sayHi2() { return "Z-Hello2"; }
+  }
+and:
+    Y y = new Z();
+    System.out.println(y.sayHi() + ", " +y.sayHi2());
+
+    What is the result?
+    A) Y-Hello, Y-Hello2
+    B) Y-Hello, Z-Hello2
+    C) Z-Hello, Z-Hello2
+    D) Z-Hello, Y-Hello2
+    E) Compilation fails
+
+Q7) Given
+  class Base {
+    private int x;
+    public Base(int x) {
+      this.x = x;
+    }
+  }
+and:
+  class Sub extends Base {
+    void doOtherStuff() {
+      System.out.println("doOtherStuff");
+    }
+  }
+and:
+Sub s = new Sub();
+s.doOtherStuff();
+What is the result?
+A) doOtherStuff
+B) Compilation fails
+C) Exception at runtime
+
+Q8) Given:
+     class Base {
+        void doBaseStuff() {
+            System.out.println("doBaseStuff");
+        }
+    }
+    class Sub extends Base {
+        void doBaseStuff() {
+            System.out.println("doSubStuff");
+        }
+
+        void doOtherStuff() {
+            System.out.println("doOtherStuff");
+        }
+    }
+In the Base and Sub classes, which are true in isolation?
+    A) doBaseStuff in Base can be marked public without causing errors
+    B) doBaseStuff in Base can be marked private without causing errors
+    C) doBaseStuff in Sub can be marked public without causing errors
+    D) doBaseStuff in Sub can be marked protected without causing errors
+    E) doBaseStuff in Sub can be marked private without causing errors
+
+Q9) Given
+public abstract class Base { // line n1
+  public abstract void doStuff(){} // line n2
+}
+and:
+public class Sub extends Base { // line n3
+}
+and:
+Base b = new Sub(); // line n4
+What is the result?
+A) Compilation fails at line n1
+B) Compilation fails at line n2
+C) Compilation fails at line n3
+D) Compilation fails at line n4
+E) Compilation succeeds.
+
+Q10) Given     
+    class Base {
+        void doBaseStuff() { System.out.println("doBaseStuff"); }
+    }
+and:
+    class Sub extends Base {
+        void doBaseStuff() { System.out.println("doSubStuff"); }
+        void doOtherStuff() { System.out.println("doOtherStuff"); }
+    }
+
+Base b = new Sub();
+b.doOtherStuff();
+    What is the result?
+    A) doSubStuff
+    B) doOtherStuff
+    C) doBaseStuff
+    D) Exception at runtime
+    E) Compilation failure
+
+Q11) Given     
+    class Base {
+        void doBaseStuff() { System.out.println("doBaseStuff"); }
+    }
+and:
+    class Sub extends Base {
+        void doBaseStuff() { System.out.println("doSubStuff"); }
+        void doOtherStuff() { System.out.println("doOtherStuff"); }
+    }
+
+Base b = new Sub();
+((Sub) b).doOtherStuff();
+
+What is the result?
+    A) doSubStuff
+    B) doOtherStuff
+    C) doBaseStuff
+    D) Exception at runtime
+    E) Compilation failure
+
+Q12) Given     
+    class Base {
+        void doBaseStuff() { System.out.println("doBaseStuff"); }
+    }
+and:
+    class Sub extends Base {
+        void doBaseStuff() { System.out.println("doSubStuff"); }
+        void doOtherStuff() { System.out.println("doOtherStuff"); }
+    }
+
+Base b = new Base();
+((Sub) b).doOtherStuff();
+
+What is the result?
+    A) doSubStuff
+    B) doOtherStuff
+    C) doBaseStuff
+    D) Exception at runtime
+    E) Compilation failure
+
+Q13) Given     
+    class Base {
+        void doBaseStuff() { System.out.println("doBaseStuff"); }
+    }
+and:
+    class Sub extends Base {
+        void doBaseStuff() { System.out.println("doSubStuff"); }
+        void doOtherStuff() { System.out.println("doOtherStuff"); }
+    }
+
+Base b = new Base();
+((StringBuilder) b).concat("Hello");
+
+What is the result?
+    A) doSubStuff
+    B) Hello
+    C) doBaseStuff
+    D) Exception at runtime
+    E) Compilation failure
+
+Q14) Given     
+    class Base {
+        void doBaseStuff() { System.out.println("doBaseStuff"); }
+    }
+and:
+    class Sub extends Base {
+        void doBaseStuff() { System.out.println("doSubStuff"); }
+        void doOtherStuff() { System.out.println("doOtherStuff"); }
+    }
+
+Base b = new Base();
+Runnable r = ((Runnable) b);
+
+What is the result?
+    A) Compiles and runs OK
+    B) Exception at runtime
+    C) Compilation failure
+
+Q15) Given:
+    class Base {
+        Base doBaseStuff() {
+            return null;
+        }
+    }
+and:
+class Sub extends Base {
+// line n1
+}
+Which can (individually) be added at line n1?
+A) Base doBaseStuff() { return null; }
+B) Sub doBaseStuff() { return null; }
+C) String doBaseStuff() { return null; }
+D) Runnable doBaseStuff() { return null; }
+ 
+Q16)    StringBuilder sb1 = new StringBuilder("Hello");
+        StringBuilder sb2 = sb1;
+        sb1 = null;
+   
+Which is true?
+    A) sb1 is unreferenced and eligible for GC
+    B) sb1 and sb2 are unreferenced and eligible for GC
+    C) No objects are eligible for GC
+ 
+Q17)  
+StringBuilder sb1 = new StringBuilder("Hello");
+StringBuilder sb2 = new StringBuilder("World");
+sb1 = null;
+sb2 = sb1;
+
+Which is true?
+    A) Object containing "Hello" is unreferenced and eligible for GC
+    B) Object containing "World" is unreferenced and eligible for GC
+    C) Object containing "Hello", and "World" are both unreferenced and eligible for GC
+    D) No objects are eligible for GC
+
+Q17)
+Which are correct declarations?
+
+A) Comparator<String> cs = s1, s2 -> s2.compareTo(s1);
+B) Comparator<String> cs = (s1, s2) -> s2.compareTo(s1);
+C) Comparator<String> cs = (var s1, String s2) -> s2.compareTo(s1);
+D) Comparator<String> cs = (var s1, s2) -> s2.compareTo(s1);
+E) Comparator<String> cs = (String s1, String s2) -> s2.compareTo(s1);
+
+
+Q18) Given:
+   ???? (s, t) -> s.length() - t.length();
+
+Which are correct inserted in place of ????
+A) BiFunction<String, String, Integer> f =
+B) BiPredicate<String> f =
+C) Comparator<String> f =
+D) Supplier<String, Integer> f =
+E) BinaryOperator<String> f =
+
+Q19)Given this directory layout:
+project/
+ + modules/
+ + module.one/
+   + src/
+     + module-info.java
+     + mypkg/
+       + MyClass.java
+ + module.two/
+   + src/
+     + module-info.java
+     + otherpkg/
+       + OtherClass.java
+Which, executed in the project directory, would build two modules correctly
+A) javac -d modules -p modules --module-source-path "./*/src" -m module.one,module.two
+B) javac -d modules -p modules --module-source-path "./*/src" -m module.one
+C) javac --module-path modules --module-source-path "./*/src" --module module.one,module.two
+D) javac --module-path modules --module-source-path "./*/src" --modules module.one,module.two
+E) javac --module-path modules --module-source-path ./*/src --module one,two
+
+Q20)
+Given:
+module first {
+  exports my.stuff;
+}
+Which would allow module second to use class my.stuff.Banana
+
+A) module second { requires my.stuff; }
+B) module second { requires Banana; }
+C) module second { uses my.stuff.Banana; }
+D) module second { requires first; }
+E) module second { opens first; }
+
+
+Q21)
+    class Base {
+        void doBaseStuff() {
+            System.out.println("doBaseStuff");
+        }
+    }
+    class Sub extends Base {
+        void doBaseStuff() {
+            System.out.println("doSubStuff");
+        }
+    }
+
+In the Base and Sub classes, which are true in isolation?
+    A) doBaseStuff in Base can be marked throws Exception without causing errors
+    B) doBaseStuff in Base can be marked throws RuntimeException without causing errors
+    C) doBaseStuff in Sub can be marked throws Exception without causing errors
+    D) doBaseStuff in Sub can be marked throws RuntimeException without causing errors
+    E) if doBaseStuff in Base were marked throws Exception,
+       then doBaseStuff in Sub can be marked throws IOException without causing errors
+
+
